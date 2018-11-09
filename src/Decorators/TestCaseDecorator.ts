@@ -1,30 +1,5 @@
-import { Container } from './Container';
+import { Run } from './Decorator.common';
 import 'reflect-metadata';
-
-function Run(className: string, testName: string, func: any, args: any[]) {
-    let passed = false;
-    let error: any;
-
-    try {
-        func(...args);
-        passed = true;
-    } catch (exception) {
-        error = exception.message || exception;
-    } finally {
-        Container.AddResult(className, {
-            Method: testName,
-            Arguments: args,
-            Error: error,
-            Passed: passed
-        });
-    }
-}
-
-export function Test(target: any, key: string) {
-    if (target.hasOwnProperty(key)) {
-        Run(target.constructor.name, key, target[key], []);
-    }
-}
 
 export function TestCase(... args: any[]): (target: any, key: string) => void {
     return (target: any, key: string) => {

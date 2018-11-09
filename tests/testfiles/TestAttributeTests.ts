@@ -1,4 +1,4 @@
-import { Test } from '../../src/Decorator';
+import { Test } from '../../src/Decorators';
 import { assert } from 'chai';
 
 class Test_attribute_tests {
