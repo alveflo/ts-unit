@@ -1,9 +1,9 @@
-export interface TestClassResult {
+export interface ITestClassResult {
     Class: string;
-    TestResults: TestResult[];
+    TestResults: ITestResult[];
 }
 
-export interface TestResult {
+export interface ITestResult {
     Method: string;
     Arguments: string[];
     Passed: boolean;
@@ -11,20 +11,19 @@ export interface TestResult {
 }
 
 export namespace Container {
-    let Results: TestClassResult[] = [];
+    const Results: ITestClassResult[] = [];
 
-    export function GetResults(): TestClassResult[] {
+    export function GetResults(): ITestClassResult[] {
         return Results;
     }
 
-    export function AddResult(className: string, result: TestResult): void {
-        for (let i = 0; i < Results.length; i++) {
-            if (Results[i].Class === className) {
-                Results[i].TestResults.push(result);
-                return;
+    export function AddResult(className: string, testResult: ITestResult): void {
+        for (const result of Results) {
+            if (result.Class === className) {
+                result.TestResults.push(testResult);
             }
         }
 
-        Results.push({ Class: className, TestResults: [result] });
+        Results.push({ Class: className, TestResults: [testResult] });
     }
 }

@@ -1,32 +1,21 @@
-import { Container, TestResult } from './Container';
+import { Container, ITestResult } from "./Container";
 
-import * as fs from 'fs';
-import * as path from 'path';
-import * as colors from 'colors';
-import * as symbols from 'log-symbols';
+import * as fs from "fs";
+import * as symbols from "log-symbols";
+import * as path from "path";
 
 export class Runner {
-    private GetMethodName(testResult: TestResult): string {
-        let methodName : string = `  ${testResult.Passed ? symbols.success : symbols.error} ${testResult.Method}`;
-
-        if (testResult.Arguments.length > 0) {
-            methodName = `${methodName}(${testResult.Arguments.join(', ')})`
-        }
-
-        return methodName;
-    }
-
     public async Run(scanningDirectory: string) {
-        let files = fs.readdirSync(path.join(process.cwd(), scanningDirectory));
-        for (let file of files) {
+        const files = fs.readdirSync(path.join(process.cwd(), scanningDirectory));
+        for (const file of files) {
             await import(path.join(process.cwd(), scanningDirectory, file));
         }
 
-        let results = Container.GetResults();
+        const results = Container.GetResults();
 
-        for (let result of results) {
+        for (const result of results) {
             console.log(result.Class);
-            for (let testResult of result.TestResults) {
+            for (const testResult of result.TestResults) {
                 console.log(this.GetMethodName(testResult));
 
                 if (testResult.Passed) {
@@ -36,5 +25,15 @@ export class Runner {
                 console.log(`\t${testResult.Error}`);
             }
         }
+    }
+
+    private GetMethodName(testResult: ITestResult): string {
+        let methodName: string = `  ${testResult.Passed ? symbols.success : symbols.error} ${testResult.Method}`;
+
+        if (testResult.Arguments.length > 0) {
+            methodName = `${methodName}(${testResult.Arguments.join(", ")})`;
+        }
+
+        return methodName;
     }
 }

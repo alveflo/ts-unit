@@ -1,4 +1,4 @@
-import { Run } from './Decorator.common';
+import { Run } from "./Decorator.common";
 
 export function Test(target: any, key: string) {
     if (target.hasOwnProperty(key)) {

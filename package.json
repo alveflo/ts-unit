@@ -4,7 +4,8 @@
   "description": "A typescript testing framework for the C# dudes",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/.bin/tslint -c ./tslint.json 'src/**/*.ts'"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "log-utils": "^0.3.0",
     "reflect-metadata": "^0.1.12",
     "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
     "typescript": "^3.1.6"
   },
   "dependencies": {}

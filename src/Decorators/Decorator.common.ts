@@ -1,4 +1,4 @@
-import { Container } from '../Container';
+import { Container } from "../Container";
 
 export function Run(className: string, testName: string, func: any, args: any[]) {
     let passed = false;
@@ -11,10 +11,10 @@ export function Run(className: string, testName: string, func: any, args: any[])
         error = exception.message || exception;
     } finally {
         Container.AddResult(className, {
-            Method: testName,
             Arguments: args,
             Error: error,
-            Passed: passed
+            Method: testName,
+            Passed: passed,
         });
     }
 }
