@@ -6,9 +6,9 @@ import * as path from "path";
 
 export class Runner {
     public async Run(scanningDirectory: string) {
-        const files = fs.readdirSync(path.join(process.cwd(), scanningDirectory));
+        const files = this.GetFiles(path.join(process.cwd(), scanningDirectory));
         for (const file of files) {
-            await import(path.join(process.cwd(), scanningDirectory, file));
+            await import(file);
         }
 
         const results = Container.GetResults();
@@ -25,6 +25,23 @@ export class Runner {
                 console.log(`\t${testResult.Error}`);
             }
         }
+    }
+
+    private GetFiles(directory: string): string[] {
+        let files: string[] = [];
+        for (const file of fs.readdirSync(directory)) {
+            const filePath = path.join(directory, file);
+            if (fs.lstatSync(filePath).isDirectory()) {
+                let x = this.GetFiles(filePath);
+                files = files.concat(x);
+            } else {
+                if (filePath.endsWith('.ts')) {
+                    files.push(filePath);
+                }
+            }
+        }
+
+        return files;
     }
 
     private GetMethodName(testResult: ITestResult): string {
