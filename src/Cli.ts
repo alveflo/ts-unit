@@ -1,6 +1,6 @@
 #!/usr/bin/env ts-node
 
-import { program, version, option, command, usage } from "commander-ts";
+import { command, option, program, usage, version } from "commander-ts";
 import { Runner } from "./Runner";
 
 const pkg: any = require("../package.json");
@@ -11,7 +11,7 @@ const pkg: any = require("../package.json");
 export class Program {
     @option("--path <path>")
     private path: string = "";
-    
+
     @command()
     private run() {
         const runner = new Runner();

@@ -1,14 +1,17 @@
 {
   "name": "cargotest",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A typescript testing framework using decorators.",
-  "main": "./src/Cargo.ts",
+  "main": "./lib/Cargo.js",
   "bin": {
     "cargo": "./src/Cli.ts"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/tslint -c ./tslint.json 'src/**/*.ts'"
+    "lint": "./node_modules/.bin/tslint -c ./tslint.json 'src/**/*.ts'",
+    "compile": "./node_modules/.bin/tsc",
+    "build": "npm run lint && npm run compile",
+    "publish": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
@@ -27,17 +30,18 @@
   },
   "homepage": "https://github.com/alveflo/ts-unit#readme",
   "devDependencies": {
+    "chai": "^4.2.0"
+  },
+  "dependencies": {
     "@types/chai": "^4.1.7",
     "@types/log-symbols": "^2.0.0",
     "@types/node": "^10.12.3",
-    "chai": "^4.2.0",
-    "colors": "^1.3.2",
     "commander-ts": "^0.1.5",
+    "colors": "^1.3.2",
     "log-symbols": "^2.2.0",
     "reflect-metadata": "^0.1.12",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "typescript": "^3.1.6"
-  },
-  "dependencies": {}
+  }
 }

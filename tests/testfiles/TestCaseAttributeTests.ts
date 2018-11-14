@@ -1,4 +1,4 @@
-import { TestCase } from '../../src/Decorators';
+import { TestCase } from '../../src/Cargo';
 import { assert } from 'chai';
 
 class Test_case_attribute_tests {

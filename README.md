@@ -4,11 +4,12 @@
 ## Why
 ## How
 ## Setup
-`experimentalDecorators` needs to be set to true.
+`experimentalDecorators` and `emitDecoratorMetadata` needs to be set to true.
+
 ## Usage
 ```typescript
 class TestClass {
-    public TestClass() {
+    constructor() {
         // Test initialization done here.
     }
 

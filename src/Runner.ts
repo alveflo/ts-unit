@@ -32,10 +32,10 @@ export class Runner {
         for (const file of fs.readdirSync(directory)) {
             const filePath = path.join(directory, file);
             if (fs.lstatSync(filePath).isDirectory()) {
-                let x = this.GetFiles(filePath);
+                const x = this.GetFiles(filePath);
                 files = files.concat(x);
             } else {
-                if (filePath.endsWith('.ts')) {
+                if (filePath.endsWith(".ts")) {
                     files.push(filePath);
                 }
             }
