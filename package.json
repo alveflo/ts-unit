@@ -3,6 +3,7 @@
   "version": "0.0.5",
   "description": "A typescript testing framework using decorators.",
   "main": "./lib/Cargo.js",
+  "types": "./lib/Cargo.d.ts",
   "bin": {
     "cargo": "./src/Cli.ts"
   },
