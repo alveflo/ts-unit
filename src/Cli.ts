@@ -1,4 +1,4 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env ts-node -D TS_NODE_IGNORE_DIAGNOSTICS
 
 import { command, option, program, usage, version } from "commander-ts";
 import { Runner } from "./Runner";
