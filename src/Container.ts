@@ -10,20 +10,20 @@ export interface ITestResult {
     Error: string;
 }
 
-export namespace Container {
-    const Results: ITestClassResult[] = [];
-
-    export function GetResults(): ITestClassResult[] {
-        return Results;
+export class Container {
+    public static GetResults(): ITestClassResult[] {
+        return this.Results;
     }
 
-    export function AddResult(className: string, testResult: ITestResult): void {
-        for (const result of Results) {
+    public static AddResult(className: string, testResult: ITestResult): void {
+        for (const result of this.Results) {
             if (result.Class === className) {
                 result.TestResults.push(testResult);
             }
         }
 
-        Results.push({ Class: className, TestResults: [testResult] });
+        this.Results.push({ Class: className, TestResults: [testResult] });
     }
+
+    private static Results: ITestClassResult[] = [];
 }
