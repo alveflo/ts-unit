@@ -1,3 +1,5 @@
+#!/usr/bin/env ts-node
+
 import { program, version, option, command, usage } from "commander-ts";
 import { Runner } from "./Runner";
 

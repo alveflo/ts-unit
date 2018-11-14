@@ -1,8 +1,11 @@
 {
-  "name": "ts-unit",
-  "version": "1.0.0",
-  "description": "A typescript testing framework for the C# dudes",
-  "main": "index.js",
+  "name": "cargotest",
+  "version": "0.0.1",
+  "description": "A typescript testing framework using decorators.",
+  "main": "./src/Cli.ts",
+  "bin": {
+    "cargo": "./src/Cli.ts"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/tslint -c ./tslint.json 'src/**/*.ts'"
@@ -14,6 +17,7 @@
   "keywords": [
     "typescript",
     "testing",
+    "unit",
     "test"
   ],
   "author": "Victor Alveflo",
