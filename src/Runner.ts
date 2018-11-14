@@ -6,6 +6,11 @@ import * as path from "path";
 
 export class Runner {
     public async Run(scanningDirectory: string) {
+        if (!fs.existsSync(scanningDirectory)) {
+            console.log(`No tests was found (no such directory ${scanningDirectory}).`);
+            return;
+        }
+
         const files = this.GetFiles(path.join(process.cwd(), scanningDirectory));
         for (const file of files) {
             await import(file);
@@ -29,6 +34,7 @@ export class Runner {
 
     private GetFiles(directory: string): string[] {
         let files: string[] = [];
+
         for (const file of fs.readdirSync(directory)) {
             const filePath = path.join(directory, file);
             if (fs.lstatSync(filePath).isDirectory()) {

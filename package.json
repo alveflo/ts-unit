@@ -5,7 +5,7 @@
   "main": "./lib/Cargo.js",
   "types": "./lib/Cargo.d.ts",
   "bin": {
-    "cargo": "./src/Cli.ts"
+    "cargo": "./bin/cargo.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
