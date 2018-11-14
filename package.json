@@ -1,6 +1,6 @@
 {
   "name": "cargotest",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A typescript testing framework using decorators.",
   "main": "./src/Cargo.ts",
   "bin": {
