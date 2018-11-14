@@ -2,7 +2,7 @@
   "name": "cargotest",
   "version": "0.0.1",
   "description": "A typescript testing framework using decorators.",
-  "main": "./src/Cli.ts",
+  "main": "./src/Cargo.ts",
   "bin": {
     "cargo": "./src/Cli.ts"
   },
