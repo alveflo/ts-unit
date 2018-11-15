@@ -11,11 +11,28 @@ export interface ITestResult {
 }
 
 export class Container {
-    public static GetResults(): ITestClassResult[] {
+    public static GetInstance(): Container {
+        if (Container.instance == null) {
+            Container.instance = new Container();
+        }
+
+        return Container.instance;
+    }
+
+    private static instance: Container;
+    private Results: ITestClassResult[] = [];
+
+    private constructor() {
+
+    }
+
+    public GetResults(): ITestClassResult[] {
+        console.log("Getting result, results:", this.Results);
         return this.Results;
     }
 
-    public static AddResult(className: string, testResult: ITestResult): void {
+    public AddResult(className: string, testResult: ITestResult): void {
+        console.log("Adding result", className, testResult);
         for (const result of this.Results) {
             if (result.Class === className) {
                 result.TestResults.push(testResult);
@@ -24,6 +41,4 @@ export class Container {
 
         this.Results.push({ Class: className, TestResults: [testResult] });
     }
-
-    private static Results: ITestClassResult[] = [];
 }

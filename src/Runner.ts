@@ -12,11 +12,16 @@ export class Runner {
         }
 
         const files = this.GetFiles(path.join(process.cwd(), scanningDirectory));
+
         for (const file of files) {
+            console.log(`Importing ${file}`);
             await import(file);
         }
 
-        const results = Container.GetResults();
+        console.log("Fetching results in runner.");
+        const container = Container.GetInstance();
+        const results = container.GetResults();
+        console.log("Results from runner:", results);
 
         for (const result of results) {
             console.log(result.Class);
