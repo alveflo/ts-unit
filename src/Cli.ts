@@ -19,8 +19,6 @@ export class Program {
             this.path = "./tests";
         }
 
-        runner.Run(this.path);
+        return runner.Run(this.path);
     }
 }
-
-const p = new Program();

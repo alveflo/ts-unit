@@ -1,3 +1,6 @@
+import * as path from "path";
+import * as jsonFile from "write-json-file";
+
 export interface ITestClassResult {
     Class: string;
     TestResults: ITestResult[];
@@ -19,26 +22,29 @@ export class Container {
         return Container.instance;
     }
 
+    private static FileName: string = path.join(process.cwd(), "CargoTestResult.json");
     private static instance: Container;
     private Results: ITestClassResult[] = [];
 
     private constructor() {
-
     }
 
     public GetResults(): ITestClassResult[] {
-        console.log("Getting result, results:", this.Results);
-        return this.Results;
+        const content = require(Container.FileName);
+        return content;
     }
 
-    public AddResult(className: string, testResult: ITestResult): void {
-        console.log("Adding result", className, testResult);
-        for (const result of this.Results) {
+    public async AddResult(className: string, testResult: ITestResult) {
+        const results: ITestClassResult[] = require(Container.FileName);
+
+        for (const result of results) {
             if (result.Class === className) {
                 result.TestResults.push(testResult);
             }
         }
 
-        this.Results.push({ Class: className, TestResults: [testResult] });
+        results.push({ Class: className, TestResults: [testResult] });
+
+        jsonFile.sync(Container.FileName, results);
     }
 }

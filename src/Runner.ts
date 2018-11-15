@@ -5,24 +5,22 @@ import * as symbols from "log-symbols";
 import * as path from "path";
 
 export class Runner {
-    public async Run(scanningDirectory: string) {
+    public Run(scanningDirectory: string): boolean {
         if (!fs.existsSync(scanningDirectory)) {
             console.log(`No tests was found (no such directory ${scanningDirectory}).`);
-            return;
+            return true;
         }
 
         const files = this.GetFiles(path.join(process.cwd(), scanningDirectory));
 
         for (const file of files) {
-            console.log(`Importing ${file}`);
-            await import(file);
+            require(file);
         }
 
-        console.log("Fetching results in runner.");
         const container = Container.GetInstance();
         const results = container.GetResults();
-        console.log("Results from runner:", results);
 
+        let passed = true;
         for (const result of results) {
             console.log(result.Class);
             for (const testResult of result.TestResults) {
@@ -31,10 +29,12 @@ export class Runner {
                 if (testResult.Passed) {
                     continue;
                 }
-
+                passed = false;
                 console.log(`\t${testResult.Error}`);
             }
         }
+
+        return passed;
     }
 
     private GetFiles(directory: string): string[] {
