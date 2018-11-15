@@ -5,7 +5,7 @@ import * as symbols from "log-symbols";
 import * as path from "path";
 
 export class Runner {
-    public Run(scanningDirectory: string): boolean {
+    public Run(scanningDirectory: string) {
         if (!fs.existsSync(scanningDirectory)) {
             console.log(`No tests was found (no such directory ${scanningDirectory}).`);
             return true;
@@ -20,21 +20,37 @@ export class Runner {
         const container = Container.GetInstance();
         const results = container.GetResults();
 
+        const testResults: any = {
+            failed: 0,
+            passed: 0,
+        };
         let passed = true;
+
         for (const result of results) {
             console.log(result.Class);
             for (const testResult of result.TestResults) {
                 console.log(this.GetMethodName(testResult));
 
                 if (testResult.Passed) {
+                    testResults.passed++;
                     continue;
                 }
+
+                testResults.failed++;
                 passed = false;
                 console.log(`\t${testResult.Error}`);
             }
         }
 
-        return passed;
+        const exit = require("exit");
+        const nrOfTests = testResults.passed + testResults.failed;
+        if (passed) {
+            console.log(`\n${symbols.success} ${testResults.success}/${nrOfTests} tests passed.`);
+            exit(0);
+        } else {
+            console.log(`\n${symbols.error} ${testResults.failed}/${nrOfTests} tests failed.`);
+            exit(1);
+        }
     }
 
     private GetFiles(directory: string): string[] {

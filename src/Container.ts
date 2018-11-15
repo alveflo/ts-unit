@@ -36,14 +36,19 @@ export class Container {
 
     public async AddResult(className: string, testResult: ITestResult) {
         const results: ITestClassResult[] = require(Container.FileName);
+        let classNameExists: boolean = false;
 
         for (const result of results) {
             if (result.Class === className) {
+                classNameExists = true;
                 result.TestResults.push(testResult);
+                break;
             }
         }
 
-        results.push({ Class: className, TestResults: [testResult] });
+        if (!classNameExists) {
+            results.push({ Class: className, TestResults: [testResult] });
+        }
 
         jsonFile.sync(Container.FileName, results);
     }

@@ -15,13 +15,12 @@ sync(() => {
 		ignore: []
 	});
 }, () => {
-	let cli = require('../src/Cli');
-	let result = new cli.Program(process.argv).run();
-	
+	require('../src/Cli');
+
 	fs.unlinkSync(testPath);
 
-	if (!result) {
-		let exit = require("exit");
-		exit(1);
-	};
+	// if (!result) {
+	// 	let exit = require("exit");
+	// 	exit(1);
+	// };
 });
