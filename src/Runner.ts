@@ -45,7 +45,7 @@ export class Runner {
         const exit = require("exit");
         const nrOfTests = testResults.passed + testResults.failed;
         if (passed) {
-            console.log(`\n${symbols.success} ${testResults.success}/${nrOfTests} tests passed.`);
+            console.log(`\n${symbols.success} ${testResults.passed}/${nrOfTests} tests passed.`);
             exit(0);
         } else {
             console.log(`\n${symbols.error} ${testResults.failed}/${nrOfTests} tests failed.`);
