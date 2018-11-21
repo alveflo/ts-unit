@@ -40,6 +40,8 @@ export class Runner {
                 passed = false;
                 console.log(`\t${testResult.Error}`);
             }
+
+            console.log("");
         }
 
         const exit = require("exit");

@@ -18,9 +18,9 @@ let newVersion = v;
 if (operation === "patch") {
     newVersion = v[0] + "." + v[1] + "." + (parseInt(v[2]) + 1);
 } else if (operation === "minor") {
-    newVersion = v[0] + "." + (parseInt(v[1]) + 1) + "." + v[2];
+    newVersion = v[0] + "." + (parseInt(v[1]) + 1) + ".0";
 } else if (operation === "major") {
-    newVersion = (parseInt(v[0]) + 1) + "." + v[1] + "." + v[2];
+    newVersion = (parseInt(v[0]) + 1) + ".0.0";
 }
 
 console.log("New version: ", newVersion);

@@ -18,9 +18,4 @@ sync(() => {
 	require('../src/Cli');
 
 	fs.unlinkSync(testPath);
-
-	// if (!result) {
-	// 	let exit = require("exit");
-	// 	exit(1);
-	// };
 });
