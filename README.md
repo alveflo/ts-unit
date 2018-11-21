@@ -20,12 +20,8 @@ The runner is used either by invoking the cli application (`$ cargo`) and the ru
 ### Test script setup
 Package.json
 ```json
-{
-    ...
-    "scripts": {
-        "test": "./node_modules/.bin/cargo"
-    }
-    ...
+"scripts": {
+    "test": "./node_modules/.bin/cargo"
 }
 ```
 
